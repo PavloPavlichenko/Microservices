@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cars-web-api-deployment
+  namespace: application
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: cars-web-api
+  template:
+    metadata:
+      labels:
+        app: cars-web-api
+    spec:
+      containers:
+      - name: cars-web-api
+        image: ipashkayounot/dotnetwebapi:1.9
+        resources:
+          requests:
+            memory: "2G"
+            cpu: "2000m"
+          limits:
+            memory: "2G"
+            cpu: "2000m"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80

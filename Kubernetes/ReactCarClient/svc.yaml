@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: react-car-service
+  namespace: application
+spec:
+  selector:
+    app: react-car
+  ports:
+  - port: 80

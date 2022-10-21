@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: application
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: hotels
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: admin

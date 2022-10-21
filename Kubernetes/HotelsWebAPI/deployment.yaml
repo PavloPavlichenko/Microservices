@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotels-web-api-deployment
+  namespace: application
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: hotels-web-api
+  template:
+    metadata:
+      labels:
+        app: hotels-web-api
+    spec:
+      containers:
+      - name: hotels-web-api
+        image: ipashkayounot/dotnetwebapi:1.6-postgres
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: "CONNECTION_STRING"
+            valueFrom:
+              secretKeyRef:
+                name: dotnet-connection-string-secret
+                key: CONNECTION_STRING
+        ports:
+        - containerPort: 80
+      initContainers:
+        - name: hotels-init
+          image: ipashkayounot/dotnetwebapi:0.3-init
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: "CONNECTION_STRING"
+            valueFrom:
+              secretKeyRef:
+                name: dotnet-connection-string-secret
+                key: CONNECTION_STRING

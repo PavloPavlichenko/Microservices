@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cars-web-api-service
+  namespace: application
+spec:
+  selector:
+    app: cars-web-api
+  ports:
+  - port: 80
