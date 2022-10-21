@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,dotnetcore,csharp
-# Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore,dotnetcore,csharp
+# Created by https://www.toptal.com/developers/gitignore/api/react,dotnetcore,aspnetcore,csharp
+# Edit at https://www.toptal.com/developers/gitignore?templates=react,dotnetcore,aspnetcore,csharp
 
 ### ASPNETCore ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -532,4 +532,19 @@ obj/
 /node_modules
 /wwwroot/node_modules
 
-# End of https://www.toptal.com/developers/gitignore/api/aspnetcore,dotnetcore,csharp
+### react ###
+.DS_*
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/react,dotnetcore,aspnetcore,csharp
