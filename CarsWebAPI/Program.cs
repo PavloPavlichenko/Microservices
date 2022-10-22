@@ -1,41 +1,58 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CarDb>(options =>
+{
+    var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+    options.UseNpgsql(connectionString!);
+});
+
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+
+builder.Services.AddCors(p =>
+  p.AddDefaultPolicy(
+    builder =>
+    {
+        builder
+          .AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader();
+    }));
+
 var app = builder.Build();
-var cars = new List<Car>();
-var id = 1;
 
+app.UseCors();
 
-app.MapGet("/cars", () => cars);
-app.MapGet("/cars/{id}", (int id) => cars.FirstOrDefault(c => c.Id == id));
-app.MapPost("/cars", (Car car) => {
-  car.Id = id;
-  id++;
-  cars.Add(car);
-  return Results.Created($"/cars/{car.Id}", car.Id);
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<CarDb>();
+db.Database.EnsureCreated();
+
+app.MapGet("/cars", async (ICarRepository repository) =>
+  Results.Ok(await repository.GetCarsAsync()));
+
+app.MapGet("/cars/{id}", async (int id, ICarRepository repository) =>
+  await repository.GetCarAsync(id) is Car car
+  ? Results.Ok(car)
+  : Results.NotFound());
+
+app.MapPost("/cars", async ([FromBody] Car car, ICarRepository repository) =>
+{
+    await repository.InsertCarAsync(car);
+    await repository.SaveAsync();
+    return Results.Created($"/cars/{car.Id}", car.Id);
 });
-app.MapPut("/cars", (Car car) => {
-  var index = cars.FindIndex(c => c.Id == car.Id);
-  if (index < 0){
-    throw new Exception("Car not found");
-  }
-  cars[index] = car;
-  return Results.NoContent();
+
+app.MapPut("/cars", async ([FromBody] Car car, ICarRepository repository) =>
+{
+    await repository.UpdateCarAsync(car);
+    await repository.SaveAsync();
+    return Results.NoContent();
 });
-app.MapDelete("/cars/{id}", (int id) => {
-  var index = cars.FindIndex(c => c.Id == id);
-  if (index < 0){
-    throw new Exception("Car not found");
-  }
-  cars.RemoveAt(index);
-  return Results.NoContent();
+
+app.MapDelete("/cars/{id}", async (int id, ICarRepository repository) =>
+{
+    await repository.DeleteCarAsync(id);
+    await repository.SaveAsync();
+    return Results.NoContent();
 });
 
 app.Run();
-
-
-public class Car
-{
-  public int Id { get; set; }
-  public string Brand { get; set; } = string.Empty;
-  public string Name { get; set; } = string.Empty;
-  public decimal Price { get; set; }
-}

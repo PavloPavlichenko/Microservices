@@ -19,3 +19,34 @@ C:\Users\Pavlo Pavlichenko\DevOps\Microservices\lab1\CarsWebAPI\obj\Debug\net6.0
 C:\Users\Pavlo Pavlichenko\DevOps\Microservices\lab1\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.pdb
 C:\Users\Pavlo Pavlichenko\DevOps\Microservices\lab1\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.genruntimeconfig.cache
 C:\Users\Pavlo Pavlichenko\DevOps\Microservices\lab1\CarsWebAPI\obj\Debug\net6.0\ref\CarsWebAPI.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\appsettings.Development.json
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\appsettings.json
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\CarsWebAPI.exe
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\CarsWebAPI.deps.json
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\CarsWebAPI.runtimeconfig.json
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\CarsWebAPI.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\CarsWebAPI.pdb
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.csproj.AssemblyReference.cache
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.AssemblyInfoInputs.cache
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.AssemblyInfo.cs
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.csproj.CoreCompileInputs.cache
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\staticwebassets.development.json
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\scopedcss\bundle\CarsWebAPI.styles.css
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\refint\CarsWebAPI.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.pdb
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.genruntimeconfig.cache
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\ref\CarsWebAPI.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Humanizer.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Npgsql.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\KPI\microservices\Microservices\CarsWebAPI\obj\Debug\net6.0\CarsWebAPI.csproj.CopyComplete
