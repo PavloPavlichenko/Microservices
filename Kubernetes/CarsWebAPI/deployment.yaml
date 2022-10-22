@@ -15,14 +15,23 @@ spec:
     spec:
       containers:
       - name: cars-web-api
-        image: ipashkayounot/dotnetwebapi:1.9
-        resources:
-          requests:
-            memory: "2G"
-            cpu: "2000m"
-          limits:
-            memory: "2G"
-            cpu: "2000m"
+        image: sebtec1212/carswebapi:0.1-postgres
         imagePullPolicy: IfNotPresent
+        env:
+          - name: "CONNECTION_STRING"
+            valueFrom:
+              secretKeyRef:
+                name: cars-connection-string-secret
+                key: CONNECTION_STRING
         ports:
         - containerPort: 80
+        initContainers:
+        - name: cars-init
+          image: sebtec1212/carswebapi:0.1-init
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: "CONNECTION_STRING"
+            valueFrom:
+              secretKeyRef:
+                name: cars-connection-string-secret
+                key: CONNECTION_STRING
