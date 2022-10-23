@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: application
+  name: postgres-cars
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-cars
+  template:
+    metadata:
+      labels:
+        app: postgres-cars
+    spec:
+      containers:
+        - name: postgres-cars
+          image: postgres:12.12
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-secret-cars
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-cars-volume-claim

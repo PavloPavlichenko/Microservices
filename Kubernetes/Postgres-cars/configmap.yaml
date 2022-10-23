@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: application
+  name: postgres-secret-cars
+  labels:
+    app: postgres-cars
+data:
+  POSTGRES_DB: cars
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: admin
