@@ -31,7 +31,7 @@ cd ..
 ```
 ## Запуск сервісів та клієнтів
 
-### Запуск бази даних PostgreSQL
+### Запуск баз даних PostgreSQL
 
 ```
 cd ./Postgres
@@ -44,9 +44,20 @@ kubectl apply -f deployment.yaml
 kubectl apply -f svc.yaml
 
 cd ..
+
+cd ./Postgres-cars
+
+kubectl apply -f pvc.yaml
+
+kubectl apply -f configmap.yaml
+
+kubectl apply -f deployment.yaml
+kubectl apply -f svc.yaml
+ 
+cd ..
 ```
 
-### Запуск сервісу з init контейнером
+### Запуск сервісів з init контейнером
 
 ```
 cd ./HotelsWebAPI
@@ -56,27 +67,23 @@ kubectl apply -f secret.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f svc.yaml
 
-// optional ingress rule
 kubectl apply -f ing.yaml
 
 cd ..
-```
 
-### Запуск сервісу без бази даних
-
-```
 cd ./CarsWebAPI
+
+kubectl apply -f secret.yaml
 
 kubectl apply -f deployment.yaml
 kubectl apply -f svc.yaml
 
-// optional ingress rule
 kubectl apply -f ing.yaml
 
 cd ..
 ```
 
-### Запуск клієнту для сервісу з базою даних
+### Запуск клієнтів для сервісів
 
 ```
 cd ./ReactClient
@@ -88,11 +95,7 @@ kubectl apply -f svc.yaml
 kubectl apply -f ing.yaml
 
 cd ..
-```
 
-### Запуск клієнту для сервісу без бази даних
-
-```
 cd ./ReactCarClient
 
 kubectl apply -f deployment.yaml
