@@ -27,7 +27,7 @@ spec:
         - containerPort: 80
       initContainers:
       - name: cars-init
-        image: sebtec1212/carswebapi:0.1-init
+        image: sebtec1212/carswebapi:0.2-init
         imagePullPolicy: IfNotPresent
         env:
         - name: "CONNECTION_STRING"
