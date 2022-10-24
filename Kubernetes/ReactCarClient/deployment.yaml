@@ -6,17 +6,16 @@ metadata:
 spec:
   replicas: 1
   selector:
-     matchLabels:
-       app: react-car
+    matchLabels:
+      app: react-car
   template:
     metadata:
       labels:
         app: react-car
     spec:
       containers:
-      - name: react-car-client
-        image: yanamanhusheva/car-react-app:1.0
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 80
-  
+        - name: react-car-client
+          image: yanamanhusheva/car-react-app:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80

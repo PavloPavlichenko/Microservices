@@ -6,17 +6,16 @@ metadata:
 spec:
   replicas: 1
   selector:
-     matchLabels:
-       app: react
+    matchLabels:
+      app: react
   template:
     metadata:
       labels:
         app: react
     spec:
       containers:
-      - name: react-client
-        image: yanamanhusheva/hotel-react-app:1.4
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 80
-  
+        - name: react-client
+          image: yanamanhusheva/hotel-react-app:1.5
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
