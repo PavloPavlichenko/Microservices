@@ -1,0 +1,20 @@
+{{- if .Values.backend.ingress.enabled }}
+apiVersion: {{ .Values.backend.ingress.apiVersion }}
+kind: Ingress
+metadata:
+  name: {{ include "backend.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{- include "common.labels.standard.backend" . | nindent 4 }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.backend.ingress.annotations "context" $ ) | nindent 4 }}
+spec:
+  ingressClassName: {{ .Values.backend.ingress.ingressClassName | quote }}
+  rules:
+    {{- if .Values.backend.ingress.hostname }}
+    - host: {{ .Values.backend.ingress.hostname | quote }}
+      http:
+        paths:
+          - path: {{ .Values.backend.ingress.path }}
+            pathType: {{ .Values.backend.ingress.pathType }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "backend.fullname" .) "servicePort" 80) | nindent 14 }}
+    {{- end }}
+{{- end }}

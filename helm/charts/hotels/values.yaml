@@ -1,0 +1,121 @@
+## @section Common parameters
+
+## @param nameOverride String to partially override fullname template (will maintain the release name)
+##
+nameOverride: ""
+## @param fullnameOverride String to fully override fullname template
+##
+fullnameOverride: ""
+## @param namespaceOverride String to fully override common.names.namespace
+##
+namespaceOverride: ""
+
+postgres:
+  host: postgres
+  username: admin
+  password: admin
+  database: microservices
+
+backend:
+
+  replicaCount: 1
+
+  service:
+    type: ClusterIP
+
+  image:
+    registry: docker.io
+    repository: ipashkayounot/dotnetwebapi
+    tag: 1.6-postgres
+    digest: ""
+    pullPolicy: IfNotPresent
+
+  initMigration:
+    enabled: true
+
+    image:
+      registry: docker.io
+      repository: ipashkayounot/dotnetwebapi
+      tag: 0.3-init
+      digest: ""
+      pullPolicy: IfNotPresent
+
+  ## Configure the ingress resource
+  ingress:
+    ## @param ingress.enabled Set to true to enable ingress record generation
+    ##
+    enabled: true
+    ## @param ingress.pathType Ingress path type
+    ##
+    pathType: Prefix
+    ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
+    ##
+    apiVersion: "networking.k8s.io/v1"
+    ## @param ingress.hostname Default host for the ingress resource
+    ##
+    hostname: localhost
+    ## @param ingress.path The Path to Nginx. You may need to set this to '/*' in order to use this with ALB ingress controllers.
+    ##
+    path: /hotels
+    ## e.g:
+    ## annotations:
+    ##   nginx.ingress.kubernetes.io/configuration-snippet: |
+    ##     add_header Access-Control-Allow-Origin *;
+    ##     add_header Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT";
+    ##     add_header Access-Control-Allow-Credentials true;
+    ##   nginx.ingress.kubernetes.io/enable-cors: "true"
+    ##   nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    ##
+    annotations: {}
+    ## @param ingress.ingressClassName Set the ingerssClassName on the ingress record for k8s 1.18+
+    ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
+    ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
+    ##
+    ingressClassName: "nginx"
+
+frontend:
+
+  replicaCount: 1
+
+  service:
+    type: ClusterIP
+
+  image:
+    registry: docker.io
+    repository: yanamanhusheva/hotel-react-app
+    tag: "1.5"
+    digest: ""
+    pullPolicy: IfNotPresent
+
+  ## Configure the ingress resource
+  ingress:
+    ## @param ingress.enabled Set to true to enable ingress record generation
+    ##
+    enabled: true
+    ## @param ingress.pathType Ingress path type
+    ##
+    pathType: Prefix
+    ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
+    ##
+    apiVersion: "networking.k8s.io/v1"
+    ## @param ingress.hostname Default host for the ingress resource
+    ##
+    hostname: localhost
+    ## @param ingress.path The Path to Nginx. You may need to set this to '/*' in order to use this with ALB ingress controllers.
+    ##
+    path: /client
+    ## e.g:
+    ## annotations:
+    ##   nginx.ingress.kubernetes.io/configuration-snippet: |
+    ##     add_header Access-Control-Allow-Origin *;
+    ##     add_header Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT";
+    ##     add_header Access-Control-Allow-Credentials true;
+    ##   nginx.ingress.kubernetes.io/enable-cors: "true"
+    ##   nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    ##
+    annotations: {}
+    ## @param ingress.ingressClassName Set the ingerssClassName on the ingress record for k8s 1.18+
+    ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
+    ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
+    ##
+    ingressClassName: "nginx"
