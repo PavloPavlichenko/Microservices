@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{- include "common.labels.standard.backend" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels: {{- include "common.labels.matchLabels.backend" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "common.labels.standard.backend" . | nindent 8 }}
+    spec:
+      initContainers:
+        {{- if .Values.backend.initMigration.enabled }}
+        - name: init-migration
+          image: {{ include "backend.initImage" . }}
+          imagePullPolicy: {{ .Values.backend.initMigration.image.pullPolicy | quote }}
+          env:
+            - name: "CONNECTION_STRING"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "backend.fullname" . }}
+                  key: CONNECTION_STRING
+        {{- end }}
+      containers:
+        - name: webapi
+          image: {{ include "backend.image" . }}
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy | quote }}
+          env:
+            - name: "CONNECTION_STRING"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "backend.fullname" . }}
+                  key: CONNECTION_STRING
+          ports:
+            - containerPort: 80
