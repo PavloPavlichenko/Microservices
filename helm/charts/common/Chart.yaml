@@ -1,0 +1,15 @@
+apiVersion: v2
+appVersion: 0.1.0
+description: A Library Helm Chart for grouping common logic between charts.
+keywords:
+  - dotnet
+  - react
+  - postgres
+  - webapi
+maintainers:
+  - name: Pavlo Pavlichenko
+  - name: Yana Manhusheva
+  - name: Daniil Semeniuk
+name: common
+type: library
+version: 0.1.0

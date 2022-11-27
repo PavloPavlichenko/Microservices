@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "frontend.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{- include "common.labels.standard.frontend" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels: {{- include "common.labels.matchLabels.frontend" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "common.labels.standard.frontend" . | nindent 8 }}
+    spec:
+      containers:
+        - name: client
+          image: {{ include "frontend.image" . }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80

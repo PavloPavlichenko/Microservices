@@ -1,0 +1,16 @@
+postgresql:
+  global:
+    postgresql:
+      auth:
+        postgresPassword: "admin"
+        username: "admin"
+        password: "admin"
+        database: "microservices"
+  fullnameOverride: "postgres"
+  primary:
+    persistence:
+      mountPath: /var/lib/postgresql/data
+      size: 2Gi
+  readReplicas:
+    persistence:
+      enabled: false
