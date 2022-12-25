@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "bftA6YBbZ6ftltsfyeGkdGfDVA66wBbU0vH1BNpcqDSpjIpOEVO+BxIKV7q+4H4xlfQsvZGbZK7UI5UShG3h3A==",
+  "dgSpecHash": "+4gtPrEcHp4Co0X+o+lQPt9IrpowX91o2MRKyaPa6oUECxrFfoWMq/6X7nbMrfMKqBNktCqY7NWcYN4JJHn+MA==",
   "success": true,
   "projectFilePath": "D:\\KPI\\microservices\\Microservices\\CarsWebAPI\\CarsWebAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sebte\\.nuget\\packages\\confluent.kafka\\1.9.3\\confluent.kafka.1.9.3.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\sebte\\.nuget\\packages\\librdkafka.redist\\1.9.2\\librdkafka.redist.1.9.2.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.10\\microsoft.entityframeworkcore.6.0.10.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.10\\microsoft.entityframeworkcore.abstractions.6.0.10.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.10\\microsoft.entityframeworkcore.analyzers.6.0.10.nupkg.sha512",
@@ -23,6 +25,7 @@
     "C:\\Users\\sebte\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.7\\npgsql.entityframeworkcore.postgresql.6.0.7.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\sebte\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512",
     "C:\\Users\\sebte\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

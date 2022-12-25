@@ -26,7 +26,7 @@ backend:
   image:
     registry: docker.io
     repository: sebtec1212/carswebapi
-    tag: 0.1-postgres
+    tag: kafka
     digest: ""
     pullPolicy: IfNotPresent
 
