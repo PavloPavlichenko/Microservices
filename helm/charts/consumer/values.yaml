@@ -11,7 +11,6 @@ fullnameOverride: ""
 namespaceOverride: ""
 
 backend:
-
   replicaCount: 1
 
   service:
@@ -19,7 +18,7 @@ backend:
 
   image:
     registry: docker.io
-    repository: ipashkayounot/dotnetwebapi
-    tag: consumer
+    repository: yanamanhusheva/consumer
+    tag: 0.1
     digest: ""
     pullPolicy: IfNotPresent
