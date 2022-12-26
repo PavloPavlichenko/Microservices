@@ -1,0 +1,25 @@
+## @section Common parameters
+
+## @param nameOverride String to partially override fullname template (will maintain the release name)
+##
+nameOverride: ""
+## @param fullnameOverride String to fully override fullname template
+##
+fullnameOverride: ""
+## @param namespaceOverride String to fully override common.names.namespace
+##
+namespaceOverride: ""
+
+backend:
+
+  replicaCount: 1
+
+  service:
+    type: ClusterIP
+
+  image:
+    registry: docker.io
+    repository: ipashkayounot/dotnetwebapi
+    tag: consumer
+    digest: ""
+    pullPolicy: IfNotPresent
