@@ -6,6 +6,7 @@ RUN dotnet restore --use-current-runtime
 
 COPY . .
 RUN dotnet publish -c Release -o /app --no-restore
+COPY config.properties /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
 WORKDIR /app

@@ -26,6 +26,12 @@ using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<CarDb>();
 db.Database.EnsureCreated();
 
+IConfiguration configuration = new ConfigurationBuilder()
+          .AddIniFile("/app/config.properties")
+          .Build();
+using var producer = new ProducerBuilder<string, string>(configuration.AsEnumerable()).Build();
+const string topic = "cars";
+
 app.MapGet("/cars", async (ICarRepository repository) =>
   Results.Ok(await repository.GetCarsAsync()));
 
@@ -38,6 +44,18 @@ app.MapPost("/cars", async ([FromBody] Car car, ICarRepository repository) =>
 {
     await repository.InsertCarAsync(car);
     await repository.SaveAsync();
+    producer.Produce(topic, new Message<string, string> { Key = car.Id.ToString(), Value = car.Name },
+    (deliveryReport) =>
+    {
+        if (deliveryReport.Error.Code != ErrorCode.NoError)
+        {
+            Console.WriteLine($"Failed to deliver message: {deliveryReport.Error.Reason}");
+        }
+        else
+        {
+            Console.WriteLine($"Produced event to topic {topic}: key = {car.Id} value = {car.Name}");
+        }
+    });
     return Results.Created($"/cars/{car.Id}", car.Id);
 });
 

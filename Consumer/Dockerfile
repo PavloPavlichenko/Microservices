@@ -5,10 +5,10 @@ COPY *.csproj .
 RUN dotnet restore --use-current-runtime
 
 COPY . .
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /app
 COPY config.properties /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
 WORKDIR /app
 COPY --from=build /app .
-ENTRYPOINT ["dotnet", "HotelsWebAPI.dll"]
+ENTRYPOINT ["dotnet", "Consumer.dll"]
