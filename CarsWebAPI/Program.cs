@@ -6,6 +6,22 @@ builder.Services.AddDbContext<CarDb>(options =>
     options.UseNpgsql(connectionString!);
 });
 
+builder.Services.Configure<KestrelServerOptions>(opts => { opts.AllowSynchronousIO = true; });
+builder.Services.AddMetrics();
+
+builder.Host.UseMetricsWebTracking()
+  // .ConfigureAppMetricsHostingConfiguration(opt => {
+  //   opt.MetricsEndpoint = "/hotels/metrics";
+  // })
+  .UseMetricsEndpoints(opts =>{
+    opts.MetricsEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
+    opts.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
+    opts.EnvironmentInfoEndpointEnabled = false;
+  });
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 builder.Services.AddCors(p =>
