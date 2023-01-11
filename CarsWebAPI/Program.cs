@@ -1,26 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 builder.Services.AddDbContext<CarDb>(options =>
 {
     var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
     options.UseNpgsql(connectionString!);
 });
-
-builder.Services.Configure<KestrelServerOptions>(opts => { opts.AllowSynchronousIO = true; });
-builder.Services.AddMetrics();
-
-builder.Host.UseMetricsWebTracking()
-  // .ConfigureAppMetricsHostingConfiguration(opt => {
-  //   opt.MetricsEndpoint = "/hotels/metrics";
-  // })
-  .UseMetricsEndpoints(opts =>{
-    opts.MetricsEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
-    opts.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
-    opts.EnvironmentInfoEndpointEnabled = false;
-  });
-
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
 
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 
@@ -42,11 +28,7 @@ using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<CarDb>();
 db.Database.EnsureCreated();
 
-IConfiguration configuration = new ConfigurationBuilder()
-          .AddIniFile("/app/config.properties")
-          .Build();
-using var producer = new ProducerBuilder<string, string>(configuration.AsEnumerable()).Build();
-const string topic = "cars";
+var savedHotels = new List<string>();
 
 app.MapGet("/cars", async (ICarRepository repository) =>
   Results.Ok(await repository.GetCarsAsync()));
@@ -60,18 +42,6 @@ app.MapPost("/cars", async ([FromBody] Car car, ICarRepository repository) =>
 {
     await repository.InsertCarAsync(car);
     await repository.SaveAsync();
-    producer.Produce(topic, new Message<string, string> { Key = car.Id.ToString(), Value = car.Name },
-    (deliveryReport) =>
-    {
-        if (deliveryReport.Error.Code != ErrorCode.NoError)
-        {
-            Console.WriteLine($"Failed to deliver message: {deliveryReport.Error.Reason}");
-        }
-        else
-        {
-            Console.WriteLine($"Produced event to topic {topic}: key = {car.Id} value = {car.Name}");
-        }
-    });
     return Results.Created($"/cars/{car.Id}", car.Id);
 });
 
@@ -80,6 +50,18 @@ app.MapPut("/cars", async ([FromBody] Car car, ICarRepository repository) =>
     await repository.UpdateCarAsync(car);
     await repository.SaveAsync();
     return Results.NoContent();
+});
+
+app.MapPost("/cars/hotel", (string hotel) =>
+{
+    savedHotels.Add(hotel);
+    Console.WriteLine("Added hotel " + hotel);
+    return Results.NoContent();
+});
+
+app.MapGet("/cars/hotel", () =>
+{
+    return savedHotels;
 });
 
 app.MapDelete("/cars/{id}", async (int id, ICarRepository repository) =>
