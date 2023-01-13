@@ -1,16 +1,17 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: cars-virtual
+  namespace: istio-system
 spec:
   hosts:
-    - local-cars-backend
+  - local-cars-backend.application.svc.cluster.local
   http:
-    - route:
-        - destination:
-            host: local-cars-backend
-      timeout: 5s
-      retries:
-        attempts: 3
-        retryOn: 5xx
-        perTryTimeout: 5s
+  - timeout: 8s
+    route:
+    - destination:
+        host: local-cars-backend.application.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+      retryOn: connect-failure,refused-stream,5xx

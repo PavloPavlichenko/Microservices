@@ -1,12 +1,13 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: cars-destination
+  namespace: application
 spec:
-  host: local-cars-backend
+  host: local-cars-backend.application.svc.cluster.local
   trafficPolicy:
     outlierDetection:
-      consecutive5xxErrors: 5 
+      consecutive5xxErrors: 3
       interval: 10s
       baseEjectionTime: 30s
       maxEjectionPercent: 80
