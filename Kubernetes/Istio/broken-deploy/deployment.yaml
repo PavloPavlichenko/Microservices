@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: application
+  name: broken
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: local
+      app.kubernetes.io/name: cars
+      layer: backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: local
+        app.kubernetes.io/name: cars
+        layer: backend
+    spec:
+      containers:
+        - name: broken
+          image: ipashkayounot/dotnetbrokenapi:0.3
