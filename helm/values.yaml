@@ -14,13 +14,3 @@ postgresql:
   readReplicas:
     persistence:
       enabled: false
-
-kafka:
-  fullnameOverride: kafka
-  numPartitions: 3
-  autoCreateTopicsEnable: false
-  provisioning:
-    enabled: true
-    topics:
-     - name: cars
-     - name: hotels

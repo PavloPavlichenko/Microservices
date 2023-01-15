@@ -1,0 +1,2 @@
+helm upgrade --install promtail grafana/promtail --create-namespace --namespace loki --values values.yaml
+helm uninstall promtail --namespace loki

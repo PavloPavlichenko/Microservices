@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: application
+  name: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: golang
+          image: golang:1.19.5-alpine3.17
+          command: [ "sh", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
